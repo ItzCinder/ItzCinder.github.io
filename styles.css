@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "flexo-medium";
+  src: url("fonts/flexo-medium.woff2") format("woff2"),
+       url("fonts/flexo-medium.woff") format("woff");
+}
+
 html{
     font-size: 10px;
 }
@@ -15,16 +21,36 @@ body{
     align-items: center;
     flex-direction: column;
     row-gap: .5rem;
+    background-color: #0d1a2d;
+}
+
+p{
+    font-size: 2rem;
+    font-weight: 200;
+}
+p, h1, h2{
+    color: #cccce9;
+    font-family: "Outfit", sans-serif;
+}
+
+.pokemon__stats-title, .card__name-pokemon{
+    margin: 1rem 0;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .card{
-    background-color: aqua;
+    background-color: #15273f;
+    border-radius: 1.5rem;
+    border: 2px dashed #15273f;
+    box-shadow: #1d1d1b .1rem .1rem 1rem;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1.5rem;
     row-gap: 1rem;
-    min-width: 18rem;
-    min-height: 30rem;
+    min-width: 36rem;
+    min-height: 60rem;
+    display: none;
 }
 
 .card__avatar-pokemon{
@@ -32,14 +58,11 @@ body{
 }
 
 .card__avatar-img{
-    width: 10rem;
-    height: 10rem;
+    width: 20rem;
+    height: 20rem;
 }
 
-.pokemon__stats-title, .card__name-pokemon{
-    margin: .5rem 0;
-    text-align: center;
-}
+
 
 .card__type-pokemon, .card__id-pokedex{
     text-align: center;
@@ -48,5 +71,10 @@ body{
 .pokemon__search{
     display: flex;
     flex-direction: column;
-    row-gap: .5rem;
+    row-gap: 1rem;
+}
+
+.pokemon__search-input, .pokemon__search-btn {
+    width: 30rem;
+    height: 2.5rem;
 }
