@@ -3,18 +3,16 @@ const colorThief = new ColorThief();
 
 
 function pickupColor(img){
-    img.addEventListener('load', () => {
-        try {
-            const color = colorThief.getColor(img); // [R, G, B]
-            const rgbDarkened = darknessColor(color); // <-- usar aquí
-            applyCSS(rgbDarkened)
-            const rgb = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-            console.log("Color predominante:", rgb);
-            console.log("Color oscuro:", rgbDarkened);
-        } catch (err) {
-            console.error("Error al obtener color:", err);
-        }
-    });
+    try {
+        const color = colorThief.getColor(img); // [R, G, B]
+        const rgbDarkened = darknessColor(color); // <-- usar aquí
+        applyCardCSS(rgbDarkened)
+        const rgb = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        console.log("Color predominante:", rgb);
+        console.log("Color oscuro:", rgbDarkened);
+    } catch (err) {
+        console.error("Error al obtener color:", err);
+    }
 }
 
 function darknessColor(rgb, factor = 0.7){
@@ -23,7 +21,7 @@ function darknessColor(rgb, factor = 0.7){
     return rgbDarkened;
 }
 
-function applyCSS(rgbDarkened){
+function applyCardCSS(rgbDarkened){
     const cardCSS = document.querySelector(".card");
     cardCSS.style.borderColor = rgbDarkened;
 
@@ -32,11 +30,34 @@ function applyCSS(rgbDarkened){
     const newShadow = currentShadow.replace(/(rgba?\([^)]+\)|#[0-9a-fA-F]{3,6})/, rgbDarkened);
     cardCSS.style.boxShadow = newShadow;
 
-    const btnSearchPkm = document.getElementById("pokemon-search-btn");
+    const btnSearchPkm = document.querySelector(".pokemon__search-logo");
     btnSearchPkm.addEventListener('click', () =>{
         cardCSS.style.display = 'flex';
     })
 }
 
-applyCSS();
-pickupColor(cardAvatarImg);
+function searchDoor(){
+    const input = document.querySelector(".pokemon__search-input");
+
+    input.addEventListener("input", () => {
+        if (input.value.trim() !== ""){
+            input.classList.add("open");
+        } else {
+            input.classList.remove("open");
+        }
+    })
+    
+}
+
+
+spritePkmElement = cardAvatarImg;
+spritePkmElement.onload = () => {
+    const cardCSS = document.querySelector(".card");
+
+    cardCSS.style.display = "flex";
+    applyCardCSS();
+    pickupColor(spritePkmElement);
+    
+};
+
+searchDoor();

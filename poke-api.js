@@ -90,13 +90,21 @@ async function showInfo(tipos, namePkm, spritePkm, IDPkm, statsPkm, statTotal){
 
 function searchPokemon(){
     const input = document.querySelector(".pokemon__search-input");
-    const boton = document.getElementById("pokemon-search-btn");
+    const boton = document.querySelector(".pokemon__search-logo")
 
-    boton.addEventListener("click", () => {
-        const texto = input.value;
+    function search(){
+        const text = input.value;
 
-        if (texto) {
-            getPokemon(texto)
+        if (text) {
+            getPokemon(text);
+        }
+    }
+
+    boton.addEventListener("click", search);
+
+    input.addEventListener("keydown", (event) => {
+        if (event.key == "Enter"){
+            search();
         }
     })
 }
